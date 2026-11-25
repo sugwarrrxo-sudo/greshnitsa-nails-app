@@ -7,15 +7,16 @@
     {
       "time": "25.11.2026 14:00",
       "has_extra": true
-    },
-    {
-      "time": "26.11.2026 18:30",
-      "has_extra": false
     }
   ],
   "hidden_slots": [
     {
       "time": "28.12.2016 12:00",
+      "has_extra": false,
+      "booked_by": null
+    },
+    {
+      "time": "26.11.2026 18:30",
       "has_extra": false,
       "booked_by": null
     }
