@@ -1,0 +1,23 @@
+{
+  "portfolio": [],
+  "reviews": [],
+  "slots": [
+    { "time": "25.11.2026 14:00", "has_extra": true },
+    { "time": "26.11.2026 18:30", "has_extra": false }
+  ],
+  "presson_album": [],
+  "service_examples": {
+    "manicure_base": [],
+    "manicure_men": [],
+    "pedicure_full": [],
+    "pedicure_no_heels": [],
+    "pedicure_no_coat": [],
+    "ext_1_2": [],
+    "ext_3_5": [],
+    "ext_6_7": [],
+    "ext_8_10": []
+  },
+  "main_rules_url": "#",
+  "presson_rules_url": "#",
+  "sbp_payment_url": "#"
+}
