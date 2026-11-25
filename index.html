@@ -992,8 +992,8 @@
 
     function updateFinalScreenText() {
         const finalTextEl = document.getElementById('final-dialog-text');
-        if (currentCategory === 'presson' && deliveryMethod === 'delivery') {
-            finalTextEl.innerText = "Спасибо за заказ! Предоплата внесена. Как только набор будет готов и отправлен, я пришлю тебе трек-номер.";
+        if (currentCategory === 'presson') {
+            finalTextEl.innerText = "Спасибо за заказ! Предоплата внесена. Заказ принят, Даша напишет тебе для уточнения деталей. Накладные ногти делаются в течении 4-7 дней.";
         } else {
             finalTextEl.innerText = "Спасибо за запись! Предоплата внесена. Буду ждать тебя по адресу: ул. Баумана 193, 1 подъезд, домофон не работает, напишите - я встречу!\nЗа день до записи тебе придет уведомление с напоминанием.";
         }
