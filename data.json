@@ -3,7 +3,12 @@
     "https://api.telegram.org/file/bot9180030244:AAGJuufEugEBs57ZdLWwEL1Q6XcZG2m2Ybg/photos/file_0.jpg"
   ],
   "reviews": [],
-  "slots": [],
+  "slots": [
+    {
+      "time": "28.11.2026 11:00",
+      "has_extra": false
+    }
+  ],
   "hidden_slots": [
     {
       "time": "28.12.2016 12:00",
