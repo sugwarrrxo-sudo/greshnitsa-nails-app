@@ -2,9 +2,16 @@
   "portfolio": [],
   "reviews": [],
   "slots": [
-    { "time": "25.11.2026 14:00", "has_extra": true },
-    { "time": "26.11.2026 18:30", "has_extra": false }
+    {
+      "time": "25.11.2026 14:00",
+      "has_extra": true
+    },
+    {
+      "time": "26.11.2026 18:30",
+      "has_extra": false
+    }
   ],
+  "hidden_slots": [],
   "presson_album": [],
   "service_examples": {
     "manicure_base": [],
@@ -17,7 +24,19 @@
     "ext_6_7": [],
     "ext_8_10": []
   },
+  "main_rules_text": "Правила записи уточняйте у мастера.",
+  "main_rules_photos": [],
+  "presson_rules_text": "Правила ухода за накладными ногтями уточняйте у мастера.",
+  "presson_rules_photos": [],
+  "price_text": "Актуальный прайс доступен в мини-приложении «Записаться».",
+  "instructions_text": "Инструкции по подготовке к визиту доступны в мини-приложении и у мастера.",
+  "tg_channel_url": "https://t.me/",
+  "master_contact_url": "@greshnlca",
+  "pinterest_1_url": "https://ru.pinterest.com/",
+  "pinterest_2_url": "https://ru.pinterest.com/",
   "main_rules_url": "#",
   "presson_rules_url": "#",
-  "sbp_payment_url": "#"
+  "sbp_payment_url": "#",
+  "bookings": [],
+  "reminders_opt_out": []
 }
