@@ -559,10 +559,7 @@
     let botData = {
         portfolio: [],
         reviews: [],
-        slots: [
-            { time: "25.11.2026 14:00", has_extra: true },
-            { time: "26.11.2026 18:30", has_extra: false }
-        ],
+        slots: [],
         hidden_slots: [],
         bookings: [],
         presson_album: [],
@@ -577,9 +574,12 @@
             ext_6_7: [],
             ext_8_10: []
         },
-        main_rules_url: "#",
-        presson_rules_url: "#",
-        sbp_payment_url: "#"
+        main_rules_url: "",
+        presson_rules_url: "",
+        sbp_payment_url: "",
+        sbp_qr_url: "",
+        pinterest_1_url: "",
+        pinterest_2_url: ""
     };
 
     let currentService = { name: "Маникюр без покрытия", price: 1400 };
@@ -675,9 +675,19 @@
     }
 
     function applyBotData() {
-        document.getElementById('main-rules-link').href = botData.main_rules_url || '#';
-        document.getElementById('presson-rules-link').href = botData.presson_rules_url || '#';
-        document.getElementById('sbp-payment-link').href = botData.sbp_payment_url || '#';
+        const mainRulesEl = document.getElementById('main-rules-link');
+        const pressonRulesEl = document.getElementById('presson-rules-link');
+        const sbpLinkEl = document.getElementById('sbp-payment-link');
+        const qrImgEl = document.querySelector('#screen-24 img[alt="QR-код для оплаты"]');
+        const pin1El = document.getElementById('pinterest-board-1');
+        const pin2El = document.getElementById('pinterest-board-2');
+
+        if (mainRulesEl) mainRulesEl.href = botData.main_rules_url || '#';
+        if (pressonRulesEl) pressonRulesEl.href = botData.presson_rules_url || '#';
+        if (sbpLinkEl) sbpLinkEl.href = botData.sbp_payment_url || '#';
+        if (qrImgEl && botData.sbp_qr_url) qrImgEl.src = botData.sbp_qr_url;
+        if (pin1El && botData.pinterest_1_url) pin1El.href = botData.pinterest_1_url;
+        if (pin2El && botData.pinterest_2_url) pin2El.href = botData.pinterest_2_url;
 
         renderGallery('portfolio-container', botData.portfolio, 'Портфолио обновится через бота');
         renderGallery('reviews-container', botData.reviews, 'Отзывы появятся через бота');
