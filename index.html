@@ -601,7 +601,7 @@
     let refPhotosCompressed = [];
     let receiptCompressed = [];
 
-    function compressFileToDataUrl(file, maxSide = 480, quality = 0.55) {
+    function compressFileToDataUrl(file, maxSide = 260, quality = 0.38) {
         return new Promise((resolve) => {
             const reader = new FileReader();
             reader.onload = () => {
@@ -644,7 +644,7 @@
         const files = Array.from(input.files || []);
         const list = [];
         for (const f of files) {
-            const c = await compressFileToDataUrl(f, 420, 0.5);
+            const c = await compressFileToDataUrl(f, 260, 0.35);
             if (c) list.push(c);
         }
         if (kind === 'own') ownNailsCompressed = list;
@@ -656,7 +656,7 @@
         const files = Array.from(input.files || []).slice(0, 1);
         const list = [];
         for (const f of files) {
-            const c = await compressFileToDataUrl(f, 480, 0.55);
+            const c = await compressFileToDataUrl(f, 300, 0.4);
             if (c) list.push(c);
         }
         receiptCompressed = list;
@@ -936,6 +936,15 @@
         return parts.join('; ');
     }
 
+    function collectMeasures() {
+        const left = [1, 2, 3, 4, 5].map(i => (document.getElementById(`m-l-${i}`)?.value || '').trim()).filter(Boolean);
+        const right = [1, 2, 3, 4, 5].map(i => (document.getElementById(`m-r-${i}`)?.value || '').trim()).filter(Boolean);
+        const parts = [];
+        if (left.length) parts.push(`Левая: ${left.join('/')}`);
+        if (right.length) parts.push(`Правая: ${right.join('/')}`);
+        return parts.join('; ');
+    }
+
     function submitBookingToBot() {
         const extrasList = selectedExtras.map(e => `${e.name} (${e.price > 0 ? '+' + e.price : e.price} ₽)`);
         if (isExtraSlot) {
@@ -963,7 +972,7 @@
         const clientName = tgUser ? [tgUser.first_name, tgUser.last_name].filter(Boolean).join(' ') : 'Клиент';
 
         const payload = {
-            slot: selectedSlot || '',
+            slot: currentCategory === 'presson' ? '' : (selectedSlot || ''),
             service: `${currentService.name} — ${currentService.price} ₽`,
             extras: extrasList,
             prepayment: `${currentPrepayment} ₽`,
@@ -974,16 +983,18 @@
             paymentPhotos: receiptCompressed
         };
 
-        const bookedSlotToHide = selectedSlot;
-        removeSlotFromApp(bookedSlotToHide);
+        if (currentCategory !== 'presson' && selectedSlot) {
+            removeSlotFromApp(selectedSlot);
+        }
 
         if (tg && typeof tg.sendData === 'function') {
-            try {
-                tg.sendData(JSON.stringify(payload));
-            } catch (err) {
-                // Если фото не поместились в sendData, отправляем без тяжёлых фото
-                const fallbackPayload = { ...payload, nailsPhotos: [], referencePhotos: [], paymentPhotos: [] };
-                tg.sendData(JSON.stringify(fallbackPayload));
+            const raw = JSON.stringify(payload);
+            // Лимит sendData в Telegram около 4096 байт: если с фото не влезает, шлём без тяжёлых фото
+            if (raw.length <= 3900) {
+                tg.sendData(raw);
+            } else {
+                const litePayload = { ...payload, nailsPhotos: [], referencePhotos: [], paymentPhotos: [] };
+                tg.sendData(JSON.stringify(litePayload));
             }
         }
 
